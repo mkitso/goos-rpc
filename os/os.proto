@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package os;
+
+service OS {
+    rpc Hostname(Empty) returns (SingleString) {}
+    rpc Mkdir(MkdirInput) returns (Empty) {}
+    rpc MkdirAll(MkdirInput) returns (Empty) {}
+    rpc Remove(SingleString) returns (Empty) {}
+    rpc RemoveAll(SingleString) returns (Empty) {}
+    rpc Stat(SingleString) returns (FileInfo) {}
+}
+
+message MkdirInput {
+  string p = 1;
+  uint32 m = 2;
+}
+
+message SingleString {
+  string s = 1;
+}
+
+message FileInfo {
+  string Name = 1;
+  int64 Size = 2;
+  uint32 Mode = 3;
+  int64 ModTime = 4;
+  bool IsDir = 5;
+}
+
+message Empty {}
